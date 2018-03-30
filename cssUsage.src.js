@@ -1788,6 +1788,30 @@ void function() { try {
     Description: Collect stats for script elements
 */
 
+
+void function() {
+    window.CSSUsage.StyleWalker.recipesToRun.push( function scriptElemStats( element, results) {
+        window._elementCount = window._elementCount || 0;
+        window._elementCount++;
+        if(element.nodeName.toLowerCase() == "script") {
+            results["data"] = results["data"] || [];
+            
+            var elemData = {
+                index : window._elementCount,
+                async : element.hasAttribute("async"),
+                defer : element.hasAttribute("defer"),
+                externalSrc : element.hasAttribute("src"),
+                parentElem : element.parentNode.nodeName.toLowerCase()
+            };
+            
+            results["data"].push(elemData);
+        }
+
+        return results;
+    });
+}();
+
+/*
 void function() {
     window.CSSUsage.StyleWalker.recipesToRun.push( function scriptElemStats( element, results) {
         if(element.nodeName.toLowerCase() == "script") {
@@ -1827,7 +1851,7 @@ void function() {
         return results;
     });
 }();
-
+*/
 //
 // This file is only here to create the TSV
 // necessary to collect the data from the crawler
