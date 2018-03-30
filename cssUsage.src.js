@@ -1797,11 +1797,11 @@ void function() {
             results["data"] = results["data"] || [];
             
             var elemData = {
-                index : window._elementCount,
-                async : element.hasAttribute("async"),
-                defer : element.hasAttribute("defer"),
-                externalSrc : element.hasAttribute("src"),
-                parentElem : element.parentNode.nodeName.toLowerCase()
+                index :         window._elementCount,
+                async :         element.hasAttribute("async")   ? 1 : 0,
+                defer :         element.hasAttribute("defer")   ? 1 : 0,
+                externalSrc :   element.hasAttribute("src")     ? 1 : 0,
+                parentElem :    element.parentNode.nodeName.toLowerCase()
             };
             
             results["data"].push(elemData);
